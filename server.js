@@ -1,11 +1,15 @@
-// ✅ server.js (باستخدام quick.db)
-const { Client, GatewayIntentBits, Partials, PermissionsBitField, EmbedBuilder } = require('discord.js');
-const db = require("quick.db");
+const { Client, Intents, MessageEmbed, Permissions } = require("discord.js");
+const db = require("pro.db");
 const config = require("./config.json");
 
+const token = process.env.TOKEN;
+
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers],
-  partials: [Partials.Message, Partials.Channel, Partials.GuildMember]
+  intents: [
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_MEMBERS
+  ]
 });
 
 client.once("ready", () => {
@@ -16,9 +20,12 @@ client.on("messageCreate", async (msg) => {
   if (msg.author.bot || !msg.guild) return;
 
   if (msg.content.startsWith(config.prefix)) {
-    const [cmd] = msg.content.slice(config.prefix.length).split(" ");
-    if (cmd === "dev") return msg.reply("by nxahmed");
+    const [cmd] = msg.content.slice(config.prefix.length).trim().split(/\s+/);
+
+    if (cmd === "dev") {
+      return msg.reply("by nxahmed");
+    }
   }
 });
 
-client.login(process.env.TOKEN);
+client.login(token);

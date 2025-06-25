@@ -1,3 +1,9 @@
 {
-  "prefix": "%"
+  "prefix": "%",
+  "rolesExceptionCount": 14,
+  "requiredTag": "• 𝐏𝐋 ┃",
+  "holdRole": "Member",
+  "spamLimit": 3,
+  "spamDurationMin": 3,
+  "timeoutDurationMin": 10
 }
